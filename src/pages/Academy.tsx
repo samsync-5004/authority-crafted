@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Academy = () => {
   return (
-    <section className="min-h-screen flex items-center justify-center bg-foreground text-primary-foreground">
+    <section className="min-h-screen flex items-center justify-center skeuo-surface-dark text-primary-foreground">
       <div className="section-container text-center max-w-xl">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -21,10 +21,7 @@ const Academy = () => {
           <p className="text-primary-foreground/60 text-lg mb-10">
             Learn PR, digital marketing, and brand strategy from practitioners who've done it at scale. Courses launching soon.
           </p>
-          <Link
-            to="/"
-            className="inline-block px-8 py-3 border border-primary-foreground/30 text-primary-foreground font-body text-sm font-semibold tracking-wide uppercase hover:bg-primary-foreground hover:text-foreground transition-all duration-300"
-          >
+          <Link to="/" className="skeuo-btn-outline px-8 py-3">
             Back to Home
           </Link>
         </motion.div>

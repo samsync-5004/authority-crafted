@@ -33,11 +33,12 @@ const CaseStudyHighlight = () => {
             </Link>
           </motion.div>
 
+          {/* Skeuomorphic stat card */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="bg-foreground/5 aspect-[4/3] flex items-center justify-center"
+            className="skeuo-card aspect-[4/3] flex items-center justify-center"
           >
             <div className="text-center p-8">
               <span className="font-display text-6xl md:text-7xl font-bold text-primary">340%</span>

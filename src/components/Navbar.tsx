@@ -31,9 +31,7 @@ const Navbar = () => {
     <>
       <motion.header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled
-            ? "bg-foreground/95 backdrop-blur-md shadow-lg"
-            : "bg-transparent"
+          scrolled ? "skeuo-nav" : "bg-transparent"
         }`}
         initial={{ y: -100 }}
         animate={{ y: 0 }}
@@ -57,9 +55,10 @@ const Navbar = () => {
                 {link.label}
               </Link>
             ))}
+            {/* Skeuomorphic glossy CTA button */}
             <Link
               to="/book-strategy-call"
-              className="ml-4 px-6 py-2.5 border border-primary-foreground/30 text-primary-foreground text-sm font-medium tracking-wide uppercase hover:bg-primary-foreground hover:text-foreground transition-all duration-300"
+              className="skeuo-btn ml-4 px-6 py-2.5"
             >
               Book Strategy Call
             </Link>
@@ -76,11 +75,11 @@ const Navbar = () => {
         </div>
       </motion.header>
 
-      {/* Mobile menu */}
+      {/* Mobile menu — full-screen with skeuo dark surface */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
-            className="fixed inset-0 z-40 bg-foreground flex flex-col items-center justify-center"
+            className="fixed inset-0 z-40 skeuo-surface-dark flex flex-col items-center justify-center"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -109,7 +108,7 @@ const Navbar = () => {
               >
                 <Link
                   to="/book-strategy-call"
-                  className="mt-4 px-8 py-3 border border-primary-foreground/30 text-primary-foreground font-medium tracking-wide uppercase hover:bg-primary-foreground hover:text-foreground transition-all duration-300"
+                  className="skeuo-btn mt-4 px-8 py-3"
                 >
                   Book Strategy Call
                 </Link>

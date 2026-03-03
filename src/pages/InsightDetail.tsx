@@ -61,7 +61,7 @@ const InsightDetail = () => {
 
   return (
     <>
-      <section className="pt-32 pb-16 bg-foreground text-primary-foreground">
+      <section className="pt-32 pb-16 skeuo-surface-dark text-primary-foreground">
         <div className="section-container max-w-3xl">
           <Link to="/insights" className="text-sm text-primary-foreground/50 hover:text-primary-foreground/80 transition-colors mb-6 inline-block">
             ← All Insights
@@ -81,7 +81,7 @@ const InsightDetail = () => {
         </div>
       </section>
 
-      <section className="section-padding bg-background">
+      <section className="section-padding skeuo-surface-light">
         <div className="section-container max-w-3xl">
           <div className="space-y-6">
             {post.content.map((paragraph, i) => (

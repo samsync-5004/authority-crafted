@@ -32,7 +32,7 @@ const footerLinks = [
 
 const Footer = () => {
   return (
-    <footer className="bg-foreground text-primary-foreground">
+    <footer className="skeuo-surface-dark text-primary-foreground">
       <div className="section-container py-20">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8">
           <div>

@@ -41,7 +41,7 @@ const StepItem = ({ step, index }: { step: typeof steps[0]; index: number }) => 
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.8, delay: 0.1 }}
     >
-      {/* Node dot */}
+      {/* Node dot — glows when in view */}
       <motion.div
         className="w-3 h-3 rounded-full bg-primary mb-8 relative"
         animate={inView ? { boxShadow: "0 0 20px 4px hsl(214 87% 30% / 0.4)" } : {}}
@@ -57,9 +57,10 @@ const StepItem = ({ step, index }: { step: typeof steps[0]; index: number }) => 
       <p className="text-muted-foreground text-lg max-w-md mb-8 italic">
         {step.description}
       </p>
+      {/* Skeuomorphic glossy blue pill button with hover micro-scale */}
       <Link
         to={step.path}
-        className="inline-flex items-center gap-3 px-6 py-3 border border-primary text-primary text-sm font-medium tracking-wide uppercase rounded-full hover:bg-primary hover:text-primary-foreground transition-all duration-300 min-h-[48px]"
+        className="skeuo-btn px-6 py-3 rounded-full hover:scale-[1.03]"
       >
         <span>→</span>
         {step.cta}
@@ -74,10 +75,11 @@ const ValueFlow = () => {
     target: containerRef,
     offset: ["start end", "end start"],
   });
+  /* Animated line height driven by scroll progress */
   const lineHeight = useTransform(scrollYProgress, [0.1, 0.9], ["0%", "100%"]);
 
   return (
-    <section className="section-padding bg-background" ref={containerRef}>
+    <section className="section-padding skeuo-surface-light" ref={containerRef}>
       <div className="section-container">
         <div className="text-center mb-8">
           <p className="text-xs font-body font-semibold tracking-[0.3em] uppercase text-muted-foreground mb-4">
@@ -89,7 +91,7 @@ const ValueFlow = () => {
         </div>
 
         <div className="relative">
-          {/* Animated vertical line - desktop only */}
+          {/* Animated vertical line — desktop only */}
           <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-px -translate-x-1/2">
             <div className="absolute inset-0 bg-border" />
             <motion.div

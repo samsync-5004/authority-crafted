@@ -31,7 +31,7 @@ const About = () => {
   return (
     <>
       {/* Hero */}
-      <section className="pt-32 pb-20 bg-foreground text-primary-foreground">
+      <section className="pt-32 pb-20 skeuo-surface-dark text-primary-foreground">
         <div className="section-container">
           <motion.p
             className="text-xs font-body font-semibold tracking-[0.3em] uppercase text-primary-foreground/50 mb-4"
@@ -55,7 +55,7 @@ const About = () => {
       </section>
 
       {/* Story */}
-      <section className="section-padding bg-background">
+      <section className="section-padding skeuo-surface-light">
         <div className="section-container max-w-3xl">
           <FadeIn>
             <h2 className="heading-section text-foreground mb-8">Our Story</h2>
@@ -74,28 +74,32 @@ const About = () => {
         </div>
       </section>
 
-      {/* Vision & Mission */}
+      {/* Vision & Mission — skeuomorphic cards */}
       <section className="section-padding bg-secondary">
         <div className="section-container">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <FadeIn>
-              <h3 className="heading-sub text-foreground mb-4">Vision</h3>
-              <p className="text-muted-foreground leading-relaxed text-lg">
-                To become Africa's most respected communications firm — the agency that global brands call first when they want to win on the continent.
-              </p>
+              <div className="skeuo-card p-10">
+                <h3 className="heading-sub text-foreground mb-4">Vision</h3>
+                <p className="text-muted-foreground leading-relaxed text-lg">
+                  To become Africa's most respected communications firm — the agency that global brands call first when they want to win on the continent.
+                </p>
+              </div>
             </FadeIn>
             <FadeIn delay={0.1}>
-              <h3 className="heading-sub text-foreground mb-4">Mission</h3>
-              <p className="text-muted-foreground leading-relaxed text-lg">
-                We engineer digital authority for brands, leaders, and ideas that refuse to be ignored. Through precision strategy, bold storytelling, and relentless execution.
-              </p>
+              <div className="skeuo-card p-10">
+                <h3 className="heading-sub text-foreground mb-4">Mission</h3>
+                <p className="text-muted-foreground leading-relaxed text-lg">
+                  We engineer digital authority for brands, leaders, and ideas that refuse to be ignored. Through precision strategy, bold storytelling, and relentless execution.
+                </p>
+              </div>
             </FadeIn>
           </div>
         </div>
       </section>
 
-      {/* Leadership */}
-      <section className="section-padding bg-background">
+      {/* Leadership — skeuomorphic cards */}
+      <section className="section-padding skeuo-surface-light">
         <div className="section-container">
           <FadeIn>
             <p className="text-xs font-body font-semibold tracking-[0.3em] uppercase text-muted-foreground mb-4">
@@ -106,17 +110,19 @@ const About = () => {
             </h2>
           </FadeIn>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {leaders.map((leader, i) => (
               <FadeIn key={leader.name} delay={i * 0.05}>
-                <div className="bg-foreground/5 aspect-[3/4] mb-4 flex items-end p-6">
-                  <div>
-                    <p className="font-display text-lg font-semibold text-foreground">
-                      {leader.name}
-                    </p>
-                    <p className="text-sm text-muted-foreground mt-1">
-                      {leader.role}
-                    </p>
+                <div className="skeuo-card overflow-hidden">
+                  <div className="bg-muted aspect-[3/4] flex items-end p-6">
+                    <div>
+                      <p className="font-display text-lg font-semibold text-foreground">
+                        {leader.name}
+                      </p>
+                      <p className="text-sm text-muted-foreground mt-1">
+                        {leader.role}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </FadeIn>
@@ -126,7 +132,7 @@ const About = () => {
       </section>
 
       {/* Expansion */}
-      <section className="section-padding bg-foreground text-primary-foreground">
+      <section className="section-padding skeuo-surface-dark text-primary-foreground">
         <div className="section-container text-center max-w-2xl mx-auto">
           <FadeIn>
             <p className="text-xs font-body font-semibold tracking-[0.3em] uppercase text-primary-foreground/50 mb-4">

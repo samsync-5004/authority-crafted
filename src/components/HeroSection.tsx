@@ -10,6 +10,7 @@ const HeroSection = () => {
     offset: ["start start", "end start"],
   });
 
+  /* Cinematic zoom: image starts slightly zoomed-in and eases out on scroll */
   const scale = useTransform(scrollYProgress, [0, 1], [1.1, 1]);
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
   const y = useTransform(scrollYProgress, [0, 0.5], [0, 100]);
@@ -57,6 +58,8 @@ const HeroSection = () => {
         >
           ID8TORS is a premium communications firm that positions brands, leaders, and ideas at the center of culture.
         </motion.p>
+
+        {/* Skeuomorphic hero CTA buttons */}
         <motion.div
           className="mt-10 flex flex-col sm:flex-row gap-4"
           initial={{ opacity: 0, y: 20 }}
@@ -65,13 +68,13 @@ const HeroSection = () => {
         >
           <Link
             to="/book-strategy-call"
-            className="px-8 py-3.5 bg-primary-foreground text-foreground font-body text-sm font-semibold tracking-wide uppercase hover:bg-primary-foreground/90 transition-all duration-300 min-w-[200px]"
+            className="skeuo-btn-light px-8 py-3.5 min-w-[200px]"
           >
             Book Strategy Call
           </Link>
           <Link
             to="/case-studies"
-            className="px-8 py-3.5 border border-primary-foreground/30 text-primary-foreground font-body text-sm font-semibold tracking-wide uppercase hover:bg-primary-foreground/10 transition-all duration-300 min-w-[200px]"
+            className="skeuo-btn-outline px-8 py-3.5 min-w-[200px]"
           >
             View Case Studies
           </Link>

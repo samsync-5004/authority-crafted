@@ -34,13 +34,22 @@
     --input: 214 20% 90%;
     --ring: 214 87% 30%;
 
-    --radius: 0.25rem;
+    --radius: 0.5rem;
 
     --navy: 214 87% 30%;
     --navy-deep: 214 90% 15%;
     --navy-light: 214 60% 50%;
     --cream: 40 30% 97%;
     --gold: 42 70% 55%;
+
+    /* Skeuomorphic design tokens */
+    --skeuo-shadow-btn: 0 4px 12px -2px hsl(214 87% 12% / 0.35), inset 0 1px 1px hsl(0 0% 100% / 0.25);
+    --skeuo-shadow-btn-active: inset 0 2px 6px hsl(214 87% 12% / 0.4), 0 1px 2px hsl(214 87% 12% / 0.15);
+    --skeuo-shadow-card: 0 2px 8px -2px hsl(214 87% 12% / 0.12), 0 8px 24px -4px hsl(214 87% 12% / 0.08);
+    --skeuo-shadow-card-hover: 0 4px 16px -2px hsl(214 87% 12% / 0.18), 0 12px 32px -4px hsl(214 87% 12% / 0.12);
+    --skeuo-shadow-input: inset 0 2px 4px hsl(214 87% 12% / 0.1), inset 0 0 0 1px hsl(214 20% 85% / 0.5);
+    --skeuo-shadow-nav: 0 4px 20px -4px hsl(214 87% 12% / 0.25), 0 1px 3px hsl(214 87% 12% / 0.1);
+    --skeuo-highlight: inset 0 1px 0 hsl(0 0% 100% / 0.15);
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -126,6 +135,155 @@
     stroke-dasharray: 1000;
     stroke-dashoffset: 1000;
     transition: stroke-dashoffset 0.1s linear;
+  }
+
+  /* ── Skeuomorphic Button (Primary / Glossy Blue) ── */
+  .skeuo-btn {
+    @apply relative inline-flex items-center justify-center font-body text-sm font-semibold tracking-wide uppercase transition-all duration-200 min-h-[48px] overflow-hidden;
+    background: linear-gradient(
+      180deg,
+      hsl(214 70% 42%) 0%,
+      hsl(214 87% 30%) 50%,
+      hsl(214 90% 24%) 100%
+    );
+    color: hsl(0 0% 100%);
+    box-shadow: var(--skeuo-shadow-btn);
+    border-top: 1px solid hsl(0 0% 100% / 0.2);
+    border-radius: var(--radius);
+  }
+  .skeuo-btn:hover {
+    background: linear-gradient(
+      180deg,
+      hsl(214 65% 46%) 0%,
+      hsl(214 87% 34%) 50%,
+      hsl(214 90% 28%) 100%
+    );
+  }
+  .skeuo-btn:active {
+    box-shadow: var(--skeuo-shadow-btn-active);
+    transform: translateY(1px);
+  }
+
+  /* ── Skeuomorphic Button (White / Light) ── */
+  .skeuo-btn-light {
+    @apply relative inline-flex items-center justify-center font-body text-sm font-semibold tracking-wide uppercase transition-all duration-200 min-h-[48px] overflow-hidden;
+    background: linear-gradient(
+      180deg,
+      hsl(0 0% 100%) 0%,
+      hsl(0 0% 96%) 100%
+    );
+    color: hsl(214 87% 12%);
+    box-shadow: var(--skeuo-shadow-btn);
+    border-top: 1px solid hsl(0 0% 100% / 0.6);
+    border-radius: var(--radius);
+  }
+  .skeuo-btn-light:hover {
+    background: linear-gradient(
+      180deg,
+      hsl(0 0% 100%) 0%,
+      hsl(0 0% 93%) 100%
+    );
+  }
+  .skeuo-btn-light:active {
+    box-shadow: var(--skeuo-shadow-btn-active);
+    transform: translateY(1px);
+  }
+
+  /* ── Skeuomorphic Button (Outline / Ghost) ── */
+  .skeuo-btn-outline {
+    @apply relative inline-flex items-center justify-center font-body text-sm font-semibold tracking-wide uppercase transition-all duration-200 min-h-[48px] overflow-hidden;
+    border: 1px solid hsl(0 0% 100% / 0.3);
+    border-top-color: hsl(0 0% 100% / 0.4);
+    color: hsl(0 0% 100%);
+    background: hsl(0 0% 100% / 0.05);
+    box-shadow: 0 2px 8px -2px hsl(214 87% 12% / 0.2);
+    border-radius: var(--radius);
+    backdrop-filter: blur(4px);
+  }
+  .skeuo-btn-outline:hover {
+    background: hsl(0 0% 100% / 0.12);
+    border-color: hsl(0 0% 100% / 0.5);
+  }
+  .skeuo-btn-outline:active {
+    box-shadow: inset 0 2px 4px hsl(214 87% 12% / 0.3);
+    transform: translateY(1px);
+  }
+
+  /* ── Skeuomorphic Card ── */
+  .skeuo-card {
+    @apply relative transition-all duration-300;
+    background: hsl(var(--card));
+    box-shadow: var(--skeuo-shadow-card);
+    border-top: 1px solid hsl(0 0% 100% / 0.6);
+    border-radius: var(--radius);
+  }
+  .skeuo-card:hover {
+    box-shadow: var(--skeuo-shadow-card-hover);
+    transform: translateY(-2px);
+  }
+
+  /* ── Skeuomorphic Input ── */
+  .skeuo-input {
+    @apply w-full px-4 py-3 font-body text-sm text-foreground transition-all duration-200;
+    background: hsl(var(--muted));
+    box-shadow: var(--skeuo-shadow-input);
+    border: 1px solid hsl(var(--border));
+    border-radius: var(--radius);
+  }
+  .skeuo-input::placeholder {
+    color: hsl(var(--muted-foreground) / 0.6);
+  }
+  .skeuo-input:focus {
+    outline: none;
+    box-shadow: var(--skeuo-shadow-input), 0 0 0 2px hsl(var(--primary) / 0.3);
+    border-color: hsl(var(--primary) / 0.5);
+  }
+
+  /* ── Skeuomorphic Select ── */
+  .skeuo-select {
+    @apply w-full px-4 py-3 font-body text-sm text-foreground appearance-none transition-all duration-200;
+    background: hsl(var(--muted));
+    box-shadow: var(--skeuo-shadow-input);
+    border: 1px solid hsl(var(--border));
+    border-radius: var(--radius);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 36px;
+  }
+  .skeuo-select:focus {
+    outline: none;
+    box-shadow: var(--skeuo-shadow-input), 0 0 0 2px hsl(var(--primary) / 0.3);
+    border-color: hsl(var(--primary) / 0.5);
+  }
+
+  /* ── Skeuomorphic Navbar surface ── */
+  .skeuo-nav {
+    background: linear-gradient(
+      180deg,
+      hsl(214 87% 14% / 0.97) 0%,
+      hsl(214 87% 10% / 0.95) 100%
+    );
+    box-shadow: var(--skeuo-nav);
+    border-bottom: 1px solid hsl(0 0% 100% / 0.08);
+    backdrop-filter: blur(16px);
+  }
+
+  /* ── Section surface with subtle texture ── */
+  .skeuo-surface-light {
+    background: linear-gradient(
+      180deg,
+      hsl(0 0% 100%) 0%,
+      hsl(214 20% 98%) 100%
+    );
+  }
+
+  .skeuo-surface-dark {
+    background: linear-gradient(
+      180deg,
+      hsl(214 87% 14%) 0%,
+      hsl(214 90% 10%) 100%
+    );
   }
 }
 

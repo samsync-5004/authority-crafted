@@ -55,7 +55,7 @@ const ServiceDetail = () => {
 
   return (
     <>
-      <section className="pt-32 pb-20 bg-foreground text-primary-foreground">
+      <section className="pt-32 pb-20 skeuo-surface-dark text-primary-foreground">
         <div className="section-container">
           <Link to="/services" className="text-sm text-primary-foreground/50 hover:text-primary-foreground/80 transition-colors mb-6 inline-block">
             ← All Services
@@ -79,7 +79,7 @@ const ServiceDetail = () => {
         </div>
       </section>
 
-      <section className="section-padding bg-background">
+      <section className="section-padding skeuo-surface-light">
         <div className="section-container max-w-3xl space-y-16">
           <div>
             <h2 className="heading-sub text-foreground mb-4">Overview</h2>
@@ -98,7 +98,8 @@ const ServiceDetail = () => {
             <div className="space-y-4">
               {service.steps.map((step, i) => (
                 <div key={step} className="flex items-center gap-4">
-                  <span className="w-8 h-8 flex items-center justify-center bg-primary text-primary-foreground text-sm font-semibold flex-shrink-0">
+                  {/* Skeuomorphic step number badge */}
+                  <span className="skeuo-btn w-8 h-8 !min-h-0 flex items-center justify-center text-sm font-semibold flex-shrink-0 !px-0 !py-0">
                     {i + 1}
                   </span>
                   <span className="text-foreground font-medium">{step}</span>

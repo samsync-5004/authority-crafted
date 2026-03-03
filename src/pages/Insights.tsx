@@ -28,7 +28,7 @@ const posts = [
 const Insights = () => {
   return (
     <>
-      <section className="pt-32 pb-20 bg-foreground text-primary-foreground">
+      <section className="pt-32 pb-20 skeuo-surface-dark text-primary-foreground">
         <div className="section-container">
           <motion.p
             className="text-xs font-body font-semibold tracking-[0.3em] uppercase text-primary-foreground/50 mb-4"
@@ -51,37 +51,35 @@ const Insights = () => {
         </div>
       </section>
 
-      <section className="section-padding bg-background">
-        <div className="section-container">
-          <div className="space-y-0 divide-y divide-border">
-            {posts.map((post, i) => (
-              <motion.div
-                key={post.slug}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.05 }}
-              >
-                <Link to={`/insights/${post.slug}`} className="block py-12 group">
-                  <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
-                    <div className="flex-1">
-                      <div className="flex items-center gap-4 mb-3">
-                        <span className="text-xs font-body text-muted-foreground tracking-widest uppercase">
-                          {post.category}
-                        </span>
-                        <span className="text-xs text-muted-foreground/50">{post.date}</span>
-                      </div>
-                      <h2 className="heading-sub text-foreground group-hover:text-primary transition-colors duration-300 mb-2">
-                        {post.title}
-                      </h2>
-                      <p className="text-muted-foreground max-w-xl">{post.excerpt}</p>
+      <section className="section-padding skeuo-surface-light">
+        <div className="section-container space-y-6">
+          {posts.map((post, i) => (
+            <motion.div
+              key={post.slug}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.05 }}
+            >
+              <Link to={`/insights/${post.slug}`} className="skeuo-card block p-10 group">
+                <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
+                  <div className="flex-1">
+                    <div className="flex items-center gap-4 mb-3">
+                      <span className="text-xs font-body text-muted-foreground tracking-widest uppercase">
+                        {post.category}
+                      </span>
+                      <span className="text-xs text-muted-foreground/50">{post.date}</span>
                     </div>
-                    <span className="text-xl text-primary group-hover:translate-x-2 transition-transform duration-300 mt-2 md:mt-4">→</span>
+                    <h2 className="heading-sub text-foreground group-hover:text-primary transition-colors duration-300 mb-2">
+                      {post.title}
+                    </h2>
+                    <p className="text-muted-foreground max-w-xl">{post.excerpt}</p>
                   </div>
-                </Link>
-              </motion.div>
-            ))}
-          </div>
+                  <span className="text-xl text-primary group-hover:translate-x-2 transition-transform duration-300 mt-2 md:mt-4">→</span>
+                </div>
+              </Link>
+            </motion.div>
+          ))}
         </div>
       </section>
     </>
