@@ -29,7 +29,7 @@ const caseStudies = [
 const CaseStudies = () => {
   return (
     <>
-      <section className="pt-32 pb-20 bg-foreground text-primary-foreground">
+      <section className="pt-32 pb-20 skeuo-surface-dark text-primary-foreground">
         <div className="section-container">
           <motion.p
             className="text-xs font-body font-semibold tracking-[0.3em] uppercase text-primary-foreground/50 mb-4"
@@ -52,42 +52,40 @@ const CaseStudies = () => {
         </div>
       </section>
 
-      <section className="section-padding bg-background">
-        <div className="section-container">
-          <div className="space-y-0 divide-y divide-border">
-            {caseStudies.map((cs, i) => (
-              <motion.div
-                key={cs.slug}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: i * 0.05 }}
+      <section className="section-padding skeuo-surface-light">
+        <div className="section-container space-y-6">
+          {caseStudies.map((cs, i) => (
+            <motion.div
+              key={cs.slug}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: i * 0.05 }}
+            >
+              <Link
+                to={`/case-studies/${cs.slug}`}
+                className="skeuo-card block p-10 md:p-12 group"
               >
-                <Link
-                  to={`/case-studies/${cs.slug}`}
-                  className="block py-16 group"
-                >
-                  <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-                    <div>
-                      <span className="text-xs font-body text-muted-foreground tracking-widest uppercase">
-                        {cs.category}
-                      </span>
-                      <h2 className="heading-sub text-foreground mt-2 group-hover:text-primary transition-colors duration-300">
-                        {cs.title}
-                      </h2>
-                      <p className="text-muted-foreground mt-2">{cs.client}</p>
-                    </div>
-                    <div className="flex items-center gap-4">
-                      <span className="text-sm font-medium text-primary whitespace-nowrap">
-                        {cs.result}
-                      </span>
-                      <span className="text-xl text-primary group-hover:translate-x-2 transition-transform duration-300">→</span>
-                    </div>
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+                  <div>
+                    <span className="text-xs font-body text-muted-foreground tracking-widest uppercase">
+                      {cs.category}
+                    </span>
+                    <h2 className="heading-sub text-foreground mt-2 group-hover:text-primary transition-colors duration-300">
+                      {cs.title}
+                    </h2>
+                    <p className="text-muted-foreground mt-2">{cs.client}</p>
                   </div>
-                </Link>
-              </motion.div>
-            ))}
-          </div>
+                  <div className="flex items-center gap-4">
+                    <span className="text-sm font-medium text-primary whitespace-nowrap">
+                      {cs.result}
+                    </span>
+                    <span className="text-xl text-primary group-hover:translate-x-2 transition-transform duration-300">→</span>
+                  </div>
+                </div>
+              </Link>
+            </motion.div>
+          ))}
         </div>
       </section>
 

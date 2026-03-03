@@ -59,7 +59,7 @@ const services = [
 const Services = () => {
   return (
     <>
-      <section className="pt-32 pb-20 bg-foreground text-primary-foreground">
+      <section className="pt-32 pb-20 skeuo-surface-dark text-primary-foreground">
         <div className="section-container">
           <motion.p
             className="text-xs font-body font-semibold tracking-[0.3em] uppercase text-primary-foreground/50 mb-4"
@@ -82,13 +82,13 @@ const Services = () => {
         </div>
       </section>
 
-      <section className="section-padding bg-background">
+      <section className="section-padding skeuo-surface-light">
         <div className="section-container">
-          <div className="space-y-0 divide-y divide-border">
+          <div className="space-y-8">
             {services.map((service, i) => (
               <motion.div
                 key={service.slug}
-                className="py-16 first:pt-0 last:pb-0"
+                className="skeuo-card p-10 md:p-12"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-80px" }}

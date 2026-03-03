@@ -13,7 +13,7 @@ const MetricsSection = () => {
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section className="bg-foreground text-primary-foreground section-padding" ref={ref}>
+    <section className="skeuo-surface-dark text-primary-foreground section-padding" ref={ref}>
       <div className="section-container">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-4">
           {metrics.map((m, i) => (

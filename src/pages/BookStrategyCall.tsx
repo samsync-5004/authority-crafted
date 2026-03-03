@@ -20,9 +20,6 @@ const services = ["PR Strategy", "Digital Marketing", "Brand Storytelling", "Tal
 const budgets = ["$5,000 – $15,000", "$15,000 – $50,000", "$50,000 – $100,000", "$100,000+"];
 const timeSlots = ["9:00 AM", "10:00 AM", "11:00 AM", "1:00 PM", "2:00 PM", "3:00 PM", "4:00 PM"];
 
-const inputClass = "w-full bg-transparent border border-border px-4 py-3 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary transition-colors duration-300 font-body text-sm";
-const selectClass = "w-full bg-background border border-border px-4 py-3 text-foreground focus:outline-none focus:border-primary transition-colors duration-300 font-body text-sm appearance-none";
-
 const BookStrategyCall = () => {
   const [form, setForm] = useState<Partial<BookingForm>>({});
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -51,7 +48,7 @@ const BookStrategyCall = () => {
 
   if (submitted) {
     return (
-      <section className="pt-32 min-h-screen bg-background flex items-center">
+      <section className="pt-32 min-h-screen skeuo-surface-light flex items-center">
         <div className="section-container text-center max-w-xl mx-auto">
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
@@ -62,10 +59,7 @@ const BookStrategyCall = () => {
             <p className="text-muted-foreground text-lg mb-8">
               Your strategy call request has been received. Our team will confirm your booking within 24 hours.
             </p>
-            <a
-              href="/"
-              className="inline-block px-8 py-3 bg-primary text-primary-foreground font-body text-sm font-semibold tracking-wide uppercase hover:bg-primary/90 transition-colors"
-            >
+            <a href="/" className="skeuo-btn px-8 py-3">
               Back to Home
             </a>
           </motion.div>
@@ -76,7 +70,7 @@ const BookStrategyCall = () => {
 
   return (
     <>
-      <section className="pt-32 pb-20 bg-foreground text-primary-foreground">
+      <section className="pt-32 pb-20 skeuo-surface-dark text-primary-foreground">
         <div className="section-container max-w-2xl">
           <motion.p
             className="text-xs font-body font-semibold tracking-[0.3em] uppercase text-primary-foreground/50 mb-4"
@@ -107,7 +101,7 @@ const BookStrategyCall = () => {
         </div>
       </section>
 
-      <section className="section-padding bg-background">
+      <section className="section-padding skeuo-surface-light">
         <div className="section-container max-w-2xl">
           <form onSubmit={handleSubmit} className="space-y-6" noValidate>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -117,7 +111,7 @@ const BookStrategyCall = () => {
                 </label>
                 <input
                   type="text"
-                  className={inputClass}
+                  className="skeuo-input"
                   placeholder="Your full name"
                   value={form.fullName || ""}
                   onChange={(e) => handleChange("fullName", e.target.value)}
@@ -130,7 +124,7 @@ const BookStrategyCall = () => {
                 </label>
                 <input
                   type="text"
-                  className={inputClass}
+                  className="skeuo-input"
                   placeholder="Company name"
                   value={form.company || ""}
                   onChange={(e) => handleChange("company", e.target.value)}
@@ -146,7 +140,7 @@ const BookStrategyCall = () => {
                 </label>
                 <input
                   type="email"
-                  className={inputClass}
+                  className="skeuo-input"
                   placeholder="you@company.com"
                   value={form.email || ""}
                   onChange={(e) => handleChange("email", e.target.value)}
@@ -159,7 +153,7 @@ const BookStrategyCall = () => {
                 </label>
                 <input
                   type="tel"
-                  className={inputClass}
+                  className="skeuo-input"
                   placeholder="+234..."
                   value={form.phone || ""}
                   onChange={(e) => handleChange("phone", e.target.value)}
@@ -174,7 +168,7 @@ const BookStrategyCall = () => {
                   Service Needed *
                 </label>
                 <select
-                  className={selectClass}
+                  className="skeuo-select"
                   value={form.service || ""}
                   onChange={(e) => handleChange("service", e.target.value)}
                 >
@@ -190,7 +184,7 @@ const BookStrategyCall = () => {
                   Budget Range *
                 </label>
                 <select
-                  className={selectClass}
+                  className="skeuo-select"
                   value={form.budget || ""}
                   onChange={(e) => handleChange("budget", e.target.value)}
                 >
@@ -208,7 +202,7 @@ const BookStrategyCall = () => {
                 Project Description *
               </label>
               <textarea
-                className={`${inputClass} min-h-[120px] resize-y`}
+                className="skeuo-input min-h-[120px] resize-y"
                 placeholder="Tell us about your project, goals, and challenges..."
                 value={form.description || ""}
                 onChange={(e) => handleChange("description", e.target.value)}
@@ -223,7 +217,7 @@ const BookStrategyCall = () => {
                 </label>
                 <input
                   type="date"
-                  className={inputClass}
+                  className="skeuo-input"
                   value={form.date || ""}
                   onChange={(e) => handleChange("date", e.target.value)}
                 />
@@ -234,7 +228,7 @@ const BookStrategyCall = () => {
                   Preferred Time *
                 </label>
                 <select
-                  className={selectClass}
+                  className="skeuo-select"
                   value={form.time || ""}
                   onChange={(e) => handleChange("time", e.target.value)}
                 >
@@ -248,9 +242,10 @@ const BookStrategyCall = () => {
             </div>
 
             <div className="pt-4">
+              {/* Full skeuomorphic submit button with press-state feedback */}
               <button
                 type="submit"
-                className="w-full sm:w-auto px-10 py-4 bg-primary text-primary-foreground font-body text-sm font-semibold tracking-wide uppercase hover:bg-primary/90 transition-colors duration-300 min-h-[48px]"
+                className="skeuo-btn w-full sm:w-auto px-10 py-4"
               >
                 Submit Booking Request
               </button>

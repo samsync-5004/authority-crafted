@@ -7,7 +7,7 @@ const CTASection = () => {
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section className="bg-foreground text-primary-foreground section-padding" ref={ref}>
+    <section className="skeuo-surface-dark text-primary-foreground section-padding" ref={ref}>
       <div className="section-container text-center">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -22,9 +22,10 @@ const CTASection = () => {
           <p className="text-primary-foreground/60 text-lg max-w-xl mx-auto mb-10">
             Let's build a strategy that makes your competitors nervous and your audience loyal.
           </p>
+          {/* Skeuomorphic glossy white CTA */}
           <Link
             to="/book-strategy-call"
-            className="inline-block px-10 py-4 bg-primary-foreground text-foreground font-body text-sm font-semibold tracking-wide uppercase hover:bg-primary-foreground/90 transition-all duration-300"
+            className="skeuo-btn-light px-10 py-4"
           >
             Book Your Strategy Call
           </Link>

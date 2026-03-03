@@ -31,7 +31,7 @@ const ServicesOverview = () => {
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section className="section-padding bg-background" ref={ref}>
+    <section className="section-padding skeuo-surface-light" ref={ref}>
       <div className="section-container">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -48,14 +48,15 @@ const ServicesOverview = () => {
           </h2>
         </motion.div>
 
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-px bg-border">
+        {/* Skeuomorphic service cards with layered shadows and hover lift */}
+        <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-6">
           {services.map((service, i) => (
             <motion.div
               key={service.slug}
               initial={{ opacity: 0, y: 30 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: i * 0.1 + 0.2 }}
-              className="bg-background p-10 md:p-12 group"
+              className="skeuo-card p-10 md:p-12 group"
             >
               <span className="text-xs font-body text-muted-foreground tracking-widest">
                 0{i + 1}

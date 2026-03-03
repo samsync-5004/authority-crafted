@@ -50,7 +50,7 @@ const CaseStudyDetail = () => {
 
   return (
     <>
-      <section className="pt-32 pb-20 bg-foreground text-primary-foreground">
+      <section className="pt-32 pb-20 skeuo-surface-dark text-primary-foreground">
         <div className="section-container">
           <Link to="/case-studies" className="text-sm text-primary-foreground/50 hover:text-primary-foreground/80 transition-colors mb-6 inline-block">
             ← All Case Studies
@@ -68,7 +68,7 @@ const CaseStudyDetail = () => {
         </div>
       </section>
 
-      <section className="section-padding bg-background">
+      <section className="section-padding skeuo-surface-light">
         <div className="section-container max-w-3xl space-y-16">
           <div>
             <h2 className="heading-sub text-foreground mb-4">The Challenge</h2>
@@ -86,7 +86,7 @@ const CaseStudyDetail = () => {
             <h2 className="heading-sub text-foreground mb-6">Results</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {cs.results.map((r) => (
-                <div key={r} className="bg-secondary p-6">
+                <div key={r} className="skeuo-card p-6">
                   <p className="font-display text-lg font-semibold text-foreground">{r}</p>
                 </div>
               ))}
