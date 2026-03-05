@@ -1,7 +1,6 @@
 import { useRef } from "react";
 import { Link } from "react-router-dom";
 import { motion, useScroll, useTransform } from "framer-motion";
-import heroBg from "@/assets/hero-bg.jpg";
 
 const HeroSection = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -10,20 +9,29 @@ const HeroSection = () => {
     offset: ["start start", "end start"],
   });
 
-  /* Cinematic zoom: image starts slightly zoomed-in and eases out on scroll */
+  /* Cinematic zoom: video starts slightly zoomed-in and eases out on scroll */
   const scale = useTransform(scrollYProgress, [0, 1], [1.1, 1]);
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
   const y = useTransform(scrollYProgress, [0, 0.5], [0, 100]);
 
   return (
     <section ref={ref} className="relative h-screen overflow-hidden">
-      {/* Background image with cinematic zoom */}
+      {/* Background video with cinematic zoom */}
       <motion.div className="absolute inset-0" style={{ scale }}>
-        <img
-          src={heroBg}
-          alt="ID8TORS premium boardroom"
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
           className="w-full h-full object-cover"
-        />
+          poster=""
+        >
+          {/* Replace this URL with your actual brand video */}
+          <source
+            src="https://cdn.coverr.co/videos/coverr-a-group-of-people-in-a-business-meeting-3839/1080p.mp4"
+            type="video/mp4"
+          />
+        </video>
         <div className="hero-overlay" />
       </motion.div>
 

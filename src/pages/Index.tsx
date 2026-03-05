@@ -5,6 +5,7 @@ import ServicesOverview from "@/components/ServicesOverview";
 import MetricsSection from "@/components/MetricsSection";
 import ValueFlow from "@/components/ValueFlow";
 import AboutSnapshot from "@/components/AboutSnapshot";
+import NewsletterSection from "@/components/NewsletterSection";
 import CTASection from "@/components/CTASection";
 
 const Index = () => {
@@ -17,6 +18,7 @@ const Index = () => {
       <MetricsSection />
       <ValueFlow />
       <AboutSnapshot />
+      <NewsletterSection />
       <CTASection />
     </>
   );
