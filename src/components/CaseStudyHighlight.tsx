@@ -33,16 +33,21 @@ const CaseStudyHighlight = () => {
             </Link>
           </motion.div>
 
-          {/* Skeuomorphic stat card */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="skeuo-card aspect-[4/3] flex items-center justify-center"
+            className="skeuo-card aspect-[4/3] overflow-hidden relative"
           >
-            <div className="text-center p-8">
-              <span className="font-display text-6xl md:text-7xl font-bold text-primary">340%</span>
-              <p className="mt-2 text-sm text-muted-foreground tracking-wide uppercase">
+            <img
+              src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80"
+              alt="Case study - digital marketing dashboard showing growth metrics"
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 to-transparent" />
+            <div className="absolute bottom-8 left-8 right-8 text-primary-foreground">
+              <span className="font-display text-5xl md:text-6xl font-bold">340%</span>
+              <p className="mt-1 text-sm text-primary-foreground/70 tracking-wide uppercase">
                 Increase in Media Mentions
               </p>
             </div>

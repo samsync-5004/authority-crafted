@@ -1,36 +1,42 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion, useScroll, useTransform } from "framer-motion";
 
+const HERO_VIDEO = "https://videos.pexels.com/video-files/3129671/3129671-uhd_2560_1440_30fps.mp4";
+const HERO_POSTER = "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=1920&q=80";
+
 const HeroSection = () => {
   const ref = useRef<HTMLDivElement>(null);
+  const [videoLoaded, setVideoLoaded] = useState(false);
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"],
   });
 
-  /* Cinematic zoom: video starts slightly zoomed-in and eases out on scroll */
   const scale = useTransform(scrollYProgress, [0, 1], [1.1, 1]);
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
   const y = useTransform(scrollYProgress, [0, 0.5], [0, 100]);
 
   return (
     <section ref={ref} className="relative h-screen overflow-hidden">
-      {/* Background video with cinematic zoom */}
+      {/* Background: fallback image + video overlay */}
       <motion.div className="absolute inset-0" style={{ scale }}>
+        {/* Static fallback image — always visible until video loads */}
+        <img
+          src={HERO_POSTER}
+          alt=""
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${videoLoaded ? "opacity-0" : "opacity-100"}`}
+        />
         <video
           autoPlay
           muted
           loop
           playsInline
-          className="w-full h-full object-cover"
-          poster=""
+          onLoadedData={() => setVideoLoaded(true)}
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${videoLoaded ? "opacity-100" : "opacity-0"}`}
+          poster={HERO_POSTER}
         >
-          {/* Replace this URL with your actual brand video */}
-          <source
-            src="https://cdn.coverr.co/videos/coverr-a-group-of-people-in-a-business-meeting-3839/1080p.mp4"
-            type="video/mp4"
-          />
+          <source src={HERO_VIDEO} type="video/mp4" />
         </video>
         <div className="hero-overlay" />
       </motion.div>
@@ -67,23 +73,16 @@ const HeroSection = () => {
           ID8TORS is a premium communications firm that positions brands, leaders, and ideas at the center of culture.
         </motion.p>
 
-        {/* Skeuomorphic hero CTA buttons */}
         <motion.div
           className="mt-10 flex flex-col sm:flex-row gap-4"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.9, duration: 0.8 }}
         >
-          <Link
-            to="/book-strategy-call"
-            className="skeuo-btn-light px-8 py-3.5 min-w-[200px]"
-          >
+          <Link to="/book-strategy-call" className="skeuo-btn-light px-8 py-3.5 min-w-[200px]">
             Book Strategy Call
           </Link>
-          <Link
-            to="/case-studies"
-            className="skeuo-btn-outline px-8 py-3.5 min-w-[200px]"
-          >
+          <Link to="/case-studies" className="skeuo-btn-outline px-8 py-3.5 min-w-[200px]">
             View Case Studies
           </Link>
         </motion.div>

@@ -40,20 +40,22 @@ const AboutSnapshot = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="grid grid-cols-2 gap-4"
+            className="relative"
           >
-            {["Strategy", "Precision", "Authority", "Growth"].map((word, i) => (
-              <div
-                key={word}
-                className={`aspect-square flex items-center justify-center ${
-                  i % 2 === 0 ? "bg-foreground text-primary-foreground" : "bg-secondary text-foreground"
-                }`}
-              >
-                <span className="font-display text-xl font-semibold tracking-wide">
-                  {word}
-                </span>
-              </div>
-            ))}
+            <div className="skeuo-card overflow-hidden aspect-[4/3]">
+              <img
+                src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80"
+                alt="ID8TORS creative team collaborating in a modern workspace"
+                className="w-full h-full object-cover"
+              />
+            </div>
+            {/* Floating stat badge */}
+            <div className="absolute -bottom-6 -left-4 skeuo-card p-5 bg-card">
+              <span className="font-display text-3xl font-bold text-primary">8</span>
+              <p className="text-xs text-muted-foreground tracking-wide uppercase mt-1">
+                Founding Creatives
+              </p>
+            </div>
           </motion.div>
         </div>
       </div>
