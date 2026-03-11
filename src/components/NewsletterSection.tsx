@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { z } from "zod";
+import { supabase } from "@/integrations/supabase/client";
 
 const emailSchema = z.string().trim().email("Please enter a valid email address").max(255);
 
@@ -23,10 +24,25 @@ const NewsletterSection = () => {
     }
 
     setLoading(true);
-    // Simulate submission — replace with backend call when Cloud is enabled
-    await new Promise((resolve) => setTimeout(resolve, 1200));
+    try {
+      const { error: dbError } = await supabase
+        .from("newsletter_subscriptions")
+        .insert({ email: result.data });
+
+      if (dbError) {
+        if (dbError.code === "23505") {
+          setError("You're already subscribed!");
+        } else {
+          setError("Something went wrong. Please try again.");
+        }
+        setLoading(false);
+        return;
+      }
+      setSubmitted(true);
+    } catch {
+      setError("Something went wrong. Please try again.");
+    }
     setLoading(false);
-    setSubmitted(true);
   };
 
   return (
