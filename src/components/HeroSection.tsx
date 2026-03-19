@@ -40,7 +40,7 @@ const animationStyles = [
     style: (i: number) => ({
       initial: { scale: 0, opacity: 0 },
       animate: { scale: 1, opacity: 1 },
-      transition: { duration: 0.35, delay: i * 0.03, type: "spring", stiffness: 300 },
+      transition: { duration: 0.35, delay: i * 0.03, type: "spring" as const, stiffness: 300 },
     }),
   },
   // 4: Slide from bottom stagger
