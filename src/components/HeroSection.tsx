@@ -82,7 +82,7 @@ const CyclingH1 = () => {
   const currentStyle = animationStyles[styleIndex];
 
   const chars1 = useMemo(() => line1.split(""), [line1]);
-  const chars2 = useMemo(() => line2.split(""), []);
+  const chars2 = useMemo(() => line2.split(""), [line2]);
 
   return (
     <AnimatePresence mode="wait">
