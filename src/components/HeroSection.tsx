@@ -54,26 +54,35 @@ const animationStyles = [
   },
 ];
 
-const CYCLE_INTERVAL = 4000; // ms between animation changes
+const CYCLE_INTERVAL = 4000;
+
+const headingPairs = [
+  { line1: "We Engineer", line2: "Digital Authority" },
+  { line1: "We Build", line2: "Brand Dominance" },
+  { line1: "We Craft", line2: "Cultural Impact" },
+  { line1: "We Shape", line2: "Market Influence" },
+  { line1: "We Drive", line2: "Strategic Growth" },
+];
 
 const CyclingH1 = () => {
   const [styleIndex, setStyleIndex] = useState(0);
+  const [textIndex, setTextIndex] = useState(0);
   const [key, setKey] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setStyleIndex((prev) => (prev + 1) % animationStyles.length);
+      setTextIndex((prev) => (prev + 1) % headingPairs.length);
       setKey((k) => k + 1);
     }, CYCLE_INTERVAL);
     return () => clearInterval(interval);
   }, []);
 
-  const line1 = "We Engineer";
-  const line2 = "Digital Authority";
+  const { line1, line2 } = headingPairs[textIndex];
   const currentStyle = animationStyles[styleIndex];
 
-  const chars1 = useMemo(() => line1.split(""), []);
-  const chars2 = useMemo(() => line2.split(""), []);
+  const chars1 = useMemo(() => line1.split(""), [line1]);
+  const chars2 = useMemo(() => line2.split(""), [line2]);
 
   return (
     <AnimatePresence mode="wait">
