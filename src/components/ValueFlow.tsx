@@ -29,6 +29,29 @@ const steps = [
   },
 ];
 
+// Build a zigzag SVG path with sharp angular corners
+const SVG_WIDTH = 100;
+const SVG_HEIGHT = 1000;
+const buildAngularPath = () => {
+  const segmentH = SVG_HEIGHT / steps.length;
+  const cx = SVG_WIDTH / 2;
+  const offsetX = 30; // horizontal zigzag offset
+  let d = `M ${cx} 0`;
+  for (let i = 0; i < steps.length; i++) {
+    const yStart = i * segmentH;
+    const yMid = yStart + segmentH * 0.35;
+    const yMid2 = yStart + segmentH * 0.65;
+    const yEnd = yStart + segmentH;
+    const dir = i % 2 === 0 ? 1 : -1;
+    d += ` L ${cx + offsetX * dir} ${yMid}`;
+    d += ` L ${cx - offsetX * dir} ${yMid2}`;
+    d += ` L ${cx} ${yEnd}`;
+  }
+  return d;
+};
+
+const ANGULAR_PATH = buildAngularPath();
+
 const StepItem = ({ step, index }: { step: typeof steps[0]; index: number }) => {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
@@ -41,9 +64,9 @@ const StepItem = ({ step, index }: { step: typeof steps[0]; index: number }) => 
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.8, delay: 0.1 }}
     >
-      {/* Node dot — glows when in view */}
+      {/* Node dot */}
       <motion.div
-        className="w-3 h-3 rounded-full bg-primary mb-8 relative"
+        className="w-3 h-3 rounded-full bg-primary mb-8 relative z-10"
         animate={inView ? { boxShadow: "0 0 20px 4px hsl(214 87% 30% / 0.4)" } : {}}
         transition={{ duration: 0.6, delay: 0.3 }}
       />
@@ -57,7 +80,6 @@ const StepItem = ({ step, index }: { step: typeof steps[0]; index: number }) => 
       <p className="text-muted-foreground text-lg max-w-md mb-8 italic">
         {step.description}
       </p>
-      {/* Skeuomorphic glossy blue pill button with hover micro-scale */}
       <Link
         to={step.path}
         className="skeuo-btn px-6 py-3 rounded-full hover:scale-[1.03]"
@@ -75,8 +97,12 @@ const ValueFlow = () => {
     target: containerRef,
     offset: ["start end", "end start"],
   });
-  /* Animated line height driven by scroll progress */
-  const lineHeight = useTransform(scrollYProgress, [0.1, 0.9], ["0%", "100%"]);
+
+  // 3D perspective transforms driven by scroll
+  const rotateX = useTransform(scrollYProgress, [0, 0.3, 0.5, 0.7, 1], [8, -3, 4, -2, 0]);
+  const rotateY = useTransform(scrollYProgress, [0, 0.25, 0.5, 0.75, 1], [-6, 4, -4, 3, 0]);
+  const translateZ = useTransform(scrollYProgress, [0, 0.5, 1], [-40, 20, 0]);
+  const lineDrawProgress = useTransform(scrollYProgress, [0.05, 0.85], [0, 1]);
 
   return (
     <section className="section-padding skeuo-surface-light" ref={containerRef}>
@@ -90,15 +116,47 @@ const ValueFlow = () => {
           </h2>
         </div>
 
-        <div className="relative">
-          {/* Animated vertical line — desktop only */}
-          <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-px -translate-x-1/2">
-            <div className="absolute inset-0 bg-border" />
-            <motion.div
-              className="absolute top-0 left-0 w-full bg-primary origin-top"
-              style={{ height: lineHeight }}
-            />
-          </div>
+        <div className="relative" style={{ perspective: "800px" }}>
+          {/* SVG angular line — desktop */}
+          <motion.div
+            className="hidden md:block absolute left-1/2 top-0 bottom-0 -translate-x-1/2 pointer-events-none"
+            style={{
+              width: `${SVG_WIDTH}px`,
+              marginLeft: `-${SVG_WIDTH / 2}px`,
+              left: "50%",
+              transformStyle: "preserve-3d",
+              rotateX,
+              rotateY,
+              translateZ,
+            }}
+          >
+            <svg
+              viewBox={`0 0 ${SVG_WIDTH} ${SVG_HEIGHT}`}
+              className="absolute inset-0 w-full h-full"
+              preserveAspectRatio="none"
+              fill="none"
+            >
+              {/* Background track */}
+              <path
+                d={ANGULAR_PATH}
+                stroke="hsl(214 20% 30% / 0.15)"
+                strokeWidth="1"
+                fill="none"
+              />
+              {/* Animated draw-on path */}
+              <motion.path
+                d={ANGULAR_PATH}
+                stroke="hsl(214 70% 42%)"
+                strokeWidth="2"
+                fill="none"
+                strokeLinecap="round"
+                style={{
+                  pathLength: lineDrawProgress,
+                  filter: "drop-shadow(0 0 6px hsl(214 87% 50% / 0.4))",
+                }}
+              />
+            </svg>
+          </motion.div>
 
           {/* Mobile static divider */}
           <div className="md:hidden absolute left-1/2 top-0 bottom-0 w-px -translate-x-1/2 bg-border" />

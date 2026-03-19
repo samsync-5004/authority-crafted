@@ -1,9 +1,129 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect, useMemo } from "react";
 import { Link } from "react-router-dom";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 
 const HERO_VIDEO = "https://videos.pexels.com/video-files/3129671/3129671-uhd_2560_1440_30fps.mp4";
 const HERO_POSTER = "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=1920&q=80";
+
+/* ── Animation presets for H1 cycling ── */
+const animationStyles = [
+  // 0: Glitch
+  {
+    name: "glitch",
+    style: (i: number) => ({
+      initial: { opacity: 0, x: i % 2 === 0 ? -4 : 4, skewX: -8 },
+      animate: { opacity: 1, x: 0, skewX: 0 },
+      transition: { duration: 0.05, delay: i * 0.02 },
+    }),
+  },
+  // 1: Wave
+  {
+    name: "wave",
+    style: (i: number) => ({
+      initial: { y: 20, opacity: 0 },
+      animate: { y: 0, opacity: 1 },
+      transition: { duration: 0.4, delay: i * 0.04, ease: [0.22, 1, 0.36, 1] },
+    }),
+  },
+  // 2: Blur fade in
+  {
+    name: "blur",
+    style: (i: number) => ({
+      initial: { opacity: 0, filter: "blur(12px)" },
+      animate: { opacity: 1, filter: "blur(0px)" },
+      transition: { duration: 0.6, delay: i * 0.03 },
+    }),
+  },
+  // 3: Scale pop
+  {
+    name: "scale",
+    style: (i: number) => ({
+      initial: { scale: 0, opacity: 0 },
+      animate: { scale: 1, opacity: 1 },
+      transition: { duration: 0.35, delay: i * 0.03, type: "spring", stiffness: 300 },
+    }),
+  },
+  // 4: Slide from bottom stagger
+  {
+    name: "slide-up",
+    style: (i: number) => ({
+      initial: { y: 40, opacity: 0, rotateX: 90 },
+      animate: { y: 0, opacity: 1, rotateX: 0 },
+      transition: { duration: 0.5, delay: i * 0.025 },
+    }),
+  },
+];
+
+const CYCLE_INTERVAL = 4000; // ms between animation changes
+
+const CyclingH1 = () => {
+  const [styleIndex, setStyleIndex] = useState(0);
+  const [key, setKey] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setStyleIndex((prev) => (prev + 1) % animationStyles.length);
+      setKey((k) => k + 1);
+    }, CYCLE_INTERVAL);
+    return () => clearInterval(interval);
+  }, []);
+
+  const line1 = "We Engineer";
+  const line2 = "Digital Authority";
+  const currentStyle = animationStyles[styleIndex];
+
+  const chars1 = useMemo(() => line1.split(""), []);
+  const chars2 = useMemo(() => line2.split(""), []);
+
+  return (
+    <AnimatePresence mode="wait">
+      <motion.h1
+        key={key}
+        className="heading-display text-primary-foreground max-w-4xl"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.3 }}
+        style={{ perspective: "600px" }}
+      >
+        <span className="inline-block">
+          {chars1.map((char, i) => {
+            const props = currentStyle.style(i);
+            return (
+              <motion.span
+                key={`${key}-1-${i}`}
+                className="inline-block"
+                initial={props.initial}
+                animate={props.animate}
+                transition={props.transition}
+              >
+                {char === " " ? "\u00A0" : char}
+              </motion.span>
+            );
+          })}
+        </span>
+        <br />
+        <span className="italic font-normal inline-block">
+          {chars2.map((char, i) => {
+            const offset = chars1.length;
+            const props = currentStyle.style(i + offset);
+            return (
+              <motion.span
+                key={`${key}-2-${i}`}
+                className="inline-block"
+                initial={props.initial}
+                animate={props.animate}
+                transition={props.transition}
+              >
+                {char === " " ? "\u00A0" : char}
+              </motion.span>
+            );
+          })}
+        </span>
+      </motion.h1>
+    </AnimatePresence>
+  );
+};
 
 const HeroSection = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -19,9 +139,7 @@ const HeroSection = () => {
 
   return (
     <section ref={ref} className="relative h-screen overflow-hidden">
-      {/* Background: fallback image + video overlay */}
       <motion.div className="absolute inset-0" style={{ scale }}>
-        {/* Static fallback image — always visible until video loads */}
         <img
           src={HERO_POSTER}
           alt=""
@@ -41,7 +159,6 @@ const HeroSection = () => {
         <div className="hero-overlay" />
       </motion.div>
 
-      {/* Content */}
       <motion.div
         className="relative z-10 flex flex-col items-center justify-center h-full text-center px-6"
         style={{ opacity, y }}
@@ -54,16 +171,9 @@ const HeroSection = () => {
         >
           PR · Digital Marketing · Brand Strategy
         </motion.p>
-        <motion.h1
-          className="heading-display text-primary-foreground max-w-4xl"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.8 }}
-        >
-          We Engineer
-          <br />
-          <span className="italic font-normal">Digital Authority</span>
-        </motion.h1>
+
+        <CyclingH1 />
+
         <motion.p
           className="mt-6 text-body-lg text-primary-foreground/70 max-w-xl"
           initial={{ opacity: 0, y: 20 }}
@@ -88,7 +198,6 @@ const HeroSection = () => {
         </motion.div>
       </motion.div>
 
-      {/* Scroll indicator */}
       <motion.div
         className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
         animate={{ y: [0, 10, 0] }}
