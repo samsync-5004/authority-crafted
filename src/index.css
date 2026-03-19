@@ -261,8 +261,8 @@
   .skeuo-nav {
     background: linear-gradient(
       180deg,
-      hsl(214 87% 14% / 0.97) 0%,
-      hsl(214 87% 10% / 0.95) 100%
+      hsl(241 73% 18% / 0.97) 0%,
+      hsl(241 80% 12% / 0.95) 100%
     );
     box-shadow: var(--skeuo-nav);
     border-bottom: 1px solid hsl(0 0% 100% / 0.08);
@@ -274,15 +274,15 @@
     background: linear-gradient(
       180deg,
       hsl(0 0% 100%) 0%,
-      hsl(214 20% 98%) 100%
+      hsl(241 20% 98%) 100%
     );
   }
 
   .skeuo-surface-dark {
     background: linear-gradient(
       180deg,
-      hsl(214 87% 14%) 0%,
-      hsl(214 90% 10%) 100%
+      hsl(241 73% 18%) 0%,
+      hsl(241 80% 12%) 100%
     );
   }
 }
